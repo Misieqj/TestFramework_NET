@@ -1,21 +1,23 @@
 ﻿using FluentAssertions;
 using Microsoft.Playwright.NUnit;
+using TestFramework_NET.Common;
+using TestFramework_NET.Common.Models;
 using TestFramework_NET.TestProject.UI_DemoQA.Data;
-using TestFramework_NET.TestProject.UI_DemoQA.PW_Pages;
-using TestFramework_NET.TestProject.UI_DemoQA.PW_Pages.Components;
-using TestFramework_NET.Utilities;
+using TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Pages;
+using TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Pages.Components;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.PW_Tests
+namespace TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Tests
 {
     public class FormsTests : PageTest
     {
-        private readonly string _baseUrl = TestContext.Parameters.Get("UI_DemoQa") ?? string.Empty;
+        private readonly string _filePath = "TestProject\\UI_DemoQA\\settings.json";
 
         [SetUp]
         public async Task Setup()
         {
+            SettingsModel settings = JsonHelper.LoadJsonAsync<SettingsModel>(_filePath);
             QLogger.PrintStartWithTcName();
-            await Page.GotoAsync(_baseUrl);
+            await Page.GotoAsync(settings.BaseUrl);
         }
 
         [Test]

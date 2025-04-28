@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <RunSettings>
 	<TestRunParameters>
-		<!-- Heroku App -->
-    <Parameter name="UI_DemoQa" value="https://demoqa.com/" />
 		<!-- Test Params -->
 		<Parameter name="Screenshot" value="true" />
 		<!-- Playwright options -->

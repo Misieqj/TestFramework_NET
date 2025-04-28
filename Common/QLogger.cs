@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace TestFramework_NET.Utilities
+﻿namespace TestFramework_NET.Common
 {
     internal static class QLogger
     {

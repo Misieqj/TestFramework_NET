@@ -1,7 +1,7 @@
 ﻿using Microsoft.Playwright;
 using TestFramework_NET.TestProject.UI_DemoQA.Data;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.PW_Pages
+namespace TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Pages
 {
     internal class FormPage(IPage _page)
     {
@@ -29,7 +29,7 @@ namespace TestFramework_NET.TestProject.UI_DemoQA.PW_Pages
             => await ButtonSubmit.ClickAsync();
 
         internal async Task<StudentFormModel> GetDataFromModalAsync()
-            => new StudentFormModel()
+            => new()
                 {
                     FullName = await StudentFullName.TextContentAsync(),
                     Gender = await StudentGender.TextContentAsync(),

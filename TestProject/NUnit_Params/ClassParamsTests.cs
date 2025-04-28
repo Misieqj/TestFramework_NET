@@ -1,4 +1,4 @@
-﻿using TestFramework_NET.Utilities;
+﻿using TestFramework_NET.Common;
 
 namespace TestFramework_NET.TestProject.NUnit_Params
 {

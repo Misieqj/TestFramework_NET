@@ -1,13 +1,14 @@
 ﻿using OpenQA.Selenium;
+using TestFramework_NET.Frameworks.Selenium.Extensions.WebElements;
 using TestFramework_NET.TestProject.UI_DemoQA.Data;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.S_Pages
+namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages
 {
     internal class FormPage(IWebDriver _driver)
     {
         private IWebElement InputFirstName => _driver.FindElement(By.Id("firstName"));
         private IWebElement InputLastName => _driver.FindElement(By.Id("lastName"));
-        private IWebElement RadioGender => _driver.FindElement(By.XPath("//input[@name='gender']//.."));
+        private IList<IWebElement> RadioGender => _driver.FindElements(By.XPath("//input[@name='gender']"));
         private IWebElement InputMobile => _driver.FindElement(By.Id("userNumber"));
         private IWebElement ButtonSubmit => _driver.FindElement(By.Id("submit"));
         private IWebElement ModalBox => _driver.FindElement(By.XPath("//div[@class='modal-body']"));
@@ -17,25 +18,28 @@ namespace TestFramework_NET.TestProject.UI_DemoQA.S_Pages
 
         internal FormPage FillNecessaryData(StudentFormModel studentData)
         {
-            InputFirstName.SendKeys(studentData.GetFirstName());
-            InputLastName.SendKeys(studentData.GetLastName());
+            InputFirstName.ScrollAndSendKeys(studentData.GetFirstName());
+            InputLastName.ScrollAndSendKeys(studentData.GetLastName());
             if (studentData.Gender != null)
-                RadioGender.FindElement(By.XPath($"//input[@name='gender']/../../*[label[contains(text(), '{studentData.Gender}')]]")).Click();
+                RadioGender.Where(x => x.GetAttribute("value") == studentData.Gender)
+                    .First()
+                    .FindElement(By.XPath("..//label"))
+                    .ScrollAndClick();
             if (studentData.Mobile != null)
-                InputMobile.SendKeys(studentData.Mobile);
+                InputMobile.ScrollAndSendKeys(studentData.Mobile);
 
             return this;
         }
 
         internal FormPage SubmitForm()
         {
-            ButtonSubmit.Click();
+            ButtonSubmit.ScrollAndClick();
 
             return this;
         }
 
         internal StudentFormModel GetDataFromModal()
-            => new StudentFormModel()
+            => new()
             {
                 FullName = StudentFullName.Text,
                 Gender = StudentGender.Text,

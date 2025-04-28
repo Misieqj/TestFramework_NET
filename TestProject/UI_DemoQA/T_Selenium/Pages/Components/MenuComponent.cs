@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
+using TestFramework_NET.Frameworks.Selenium.Extensions.WebElements;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.S_Pages.Components
+namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages.Components
 {
     internal class MenuComponent(IWebDriver _driver)
     {
@@ -19,14 +20,14 @@ namespace TestFramework_NET.TestProject.UI_DemoQA.S_Pages.Components
 
         internal MenuComponent ClickMenuPosition(string name)
         {
-            MenuItem(name).Click();
+            MenuItem(name).ScrollAndClick();
 
             return this;
         }
 
         internal MenuComponent ClickSubmenuPosition(string name)
         {
-            SubmenuItem(name).Click();
+            SubmenuItem(name).ScrollAndClick();
 
             return this;
         }

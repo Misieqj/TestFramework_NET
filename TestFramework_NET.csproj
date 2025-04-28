@@ -33,4 +33,10 @@
     <None Include="C:\Users\misie\source\repos\TestFramework_NET\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestProject\UI_DemoQA\settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
