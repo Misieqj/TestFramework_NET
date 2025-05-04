@@ -10,12 +10,12 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
 {
     public class FormsTests_SetUp : SetUpPageTest
     {
-        private readonly string _filePath = "TestProject\\UI_DemoQA\\settings.json";
+        private readonly string _settingsFilePath = "TestProject\\DemoQA\\settings.json";
 
         [SetUp]
         public async Task Setup()
         {
-            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(_filePath);
+            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(_settingsFilePath);
             await Page.GotoAsync(settings.BaseUrl);
         }
 

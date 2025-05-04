@@ -11,16 +11,19 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
 {
     public class FormsTests : PageTest
     {
-        private readonly string _filePath = "TestProject\\UI_DemoQA\\settings.json";
-        private readonly string _studentXmlPath = "TestProject\\UI_DemoQA\\Data\\student.xml";
-        private readonly string _studentJsonPath = "TestProject\\UI_DemoQA\\Data\\student.json";
+        private readonly string _baseDir = "TestProject\\DemoQA\\";
+        private string SettingsFilePath => $"{_baseDir}settings.json";
+        private string StudentXmlPath => $"{_baseDir}Data\\student.xml";
+        private string StudentJsonPath => $"{_baseDir}Data\\student.json";
 
         [SetUp]
         public async Task Setup()
         {
-            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(_filePath);
+            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(SettingsFilePath);
             QLogger.PrintStartWithTcName();
             await Page.GotoAsync(settings.BaseUrl);
+
+            string ns = typeof(FormsTests).Namespace!;
         }
 
         [Test]
@@ -51,7 +54,7 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
         public async Task CheckFormNecessaryData_XML()
         {
             // Arrange
-            StudentModel studentData = XmlHelper.LoadXml<StudentModel>(_studentXmlPath);
+            StudentModel studentData = XmlHelper.LoadXml<StudentModel>(StudentXmlPath);
 
             // Act
             MenuComponent menu = new(Page);
@@ -70,7 +73,7 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
         public async Task CheckFormNecessaryData_JSON()
         {
             // Arrange
-            StudentModel studentData = JsonHelper.LoadJson<StudentModel>(_studentJsonPath);
+            StudentModel studentData = JsonHelper.LoadJson<StudentModel>(StudentJsonPath);
 
             // Act
             MenuComponent menu = new(Page);
