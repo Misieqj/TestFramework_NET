@@ -1,7 +1,7 @@
 ﻿using Microsoft.Playwright;
-using TestFramework_NET.TestProject.UI_DemoQA.Data.Models;
+using TestFramework_NET.TestProject.DemoQA.Data.Models;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Pages
+namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Pages
 {
     internal class FormPage(IPage _page)
     {

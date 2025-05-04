@@ -1,6 +1,6 @@
 ﻿using Microsoft.Playwright;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Pages.Components
+namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Pages.Components
 {
     internal class MenuComponent(IPage _page)
     {
