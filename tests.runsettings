@@ -2,9 +2,12 @@
 <RunSettings>
 	<TestRunParameters>
 		<!-- Test Params -->
-		<Parameter name="Screenshot" value="true" />
+    <Parameter name="Screenshot" value="true" />
+    <Parameter name="DirResults" value="_Results" />
+    <Parameter name="ConnectionString" value="Server=your_server;Database=your_db;User Id=your_user;Password=your_pass;" />
 		<!-- Playwright options -->
-		<Parameter name="BrowserType" value="chromium" /> <!-- chromium / firefox / webkit -->
+    <Parameter name="BrowserType" value="chromium" /> <!-- chromium / firefox / webkit -->
+    <Parameter name="Headless" value="false" />
 	</TestRunParameters>
   <Playwright>
     <LaunchOptions>

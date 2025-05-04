@@ -1,0 +1,5 @@
+﻿<Student>
+  <FullName>FirstName LastName</FullName>
+  <Gender>Male</Gender>
+  <Mobile>1234567890</Mobile>
+</Student>

@@ -3,10 +3,11 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using TestFramework_NET.Common.Models;
 using TestFramework_NET.Common;
-using TestFramework_NET.TestProject.UI_DemoQA.Data;
 using TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages;
 using TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages.Components;
 using TestFramework_NET.Frameworks.Selenium;
+using TestFramework_NET.TestProject.UI_DemoQA.Data.Models;
+using TestFramework_NET.Common.Helpers;
 
 namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Tests
 {
@@ -20,7 +21,7 @@ namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Tests
         [SetUp]
         public void Setup()
         {
-            SettingsModel settings = JsonHelper.LoadJsonAsync<SettingsModel>(_filePath);
+            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(_filePath);
             QLogger.PrintStartWithTcName();
             _driver = new ChromeDriver(); // we can also use FirefoxDriver or EdgeDriver
             _driver.Manage().Window.Size = new System.Drawing.Size(1280, 720);
@@ -29,11 +30,12 @@ namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Tests
         }
 
         [Test]
-        public void CheckFormNecessaryData_Selenium()
+        public void CheckFormNecessaryData()
         {
             // Arrange
-            StudentFormModel studentData = new("First", "Last")
+            StudentModel studentData = new()
             {
+                FullName = "FirstName LastName",
                 Gender = "Male",
                 Mobile = "1234567890"
             };

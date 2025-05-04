@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
-using TestFramework_NET.Frameworks.Selenium.Extensions.WebElements;
-using TestFramework_NET.TestProject.UI_DemoQA.Data;
+using TestFramework_NET.Frameworks.Selenium.Extensions;
+using TestFramework_NET.TestProject.UI_DemoQA.Data.Models;
 
 namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages
 {
@@ -16,17 +16,15 @@ namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages
         private IWebElement StudentGender => ModalBox.FindElement(By.XPath("//td[text()='Gender']/../td[2]"));
         private IWebElement StudentPhone => ModalBox.FindElement(By.XPath("//tr[td[text()='Mobile']]/td[2]"));
 
-        internal FormPage FillNecessaryData(StudentFormModel studentData)
+        internal FormPage FillNecessaryData(StudentModel student)
         {
-            InputFirstName.ScrollAndSendKeys(studentData.GetFirstName());
-            InputLastName.ScrollAndSendKeys(studentData.GetLastName());
-            if (studentData.Gender != null)
-                RadioGender.Where(x => x.GetAttribute("value") == studentData.Gender)
-                    .First()
-                    .FindElement(By.XPath("..//label"))
-                    .ScrollAndClick();
-            if (studentData.Mobile != null)
-                InputMobile.ScrollAndSendKeys(studentData.Mobile);
+            InputFirstName.ScrollAndSendKeys(student.FullName.Split(" ").First());
+            InputLastName.ScrollAndSendKeys(student.FullName.Split(" ").Last());
+            RadioGender.Where(x => x.GetAttribute("value") == student.Gender)
+                .First()
+                .FindElement(By.XPath("..//label"))
+                .ScrollAndClick();
+            InputMobile.ScrollAndSendKeys(student.Mobile);
 
             return this;
         }
@@ -38,12 +36,12 @@ namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages
             return this;
         }
 
-        internal StudentFormModel GetDataFromModal()
+        internal StudentModel GetDataFromModal()
             => new()
-            {
-                FullName = StudentFullName.Text,
-                Gender = StudentGender.Text,
-                Mobile = StudentPhone.Text
-            };
+                {
+                    FullName = StudentFullName.Text,
+                    Gender = StudentGender.Text,
+                    Mobile = StudentPhone.Text
+                };
     }
 }

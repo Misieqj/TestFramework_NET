@@ -19,18 +19,17 @@
         internal static void PrintEnd()
             => TestContext.Out.WriteLine("╚═════════════════════════════════════════════════════════════════════════");
 
-        // To print
         internal static void Print(string msg)
             => TestContext.Out.WriteLine($"║ {msg}");
 
         internal static void PrintWithTimeStamp(string msg)
             => TestContext.Out.WriteLine($"║ {DateTime.Now}: {msg}");
 
-        internal static void PrintError(string msg)
-            => TestContext.Error.WriteLine($"=> {msg}");
-
+        // For test results
         internal static void PrintAttachmentInfo(string path, string description)
             => TestContext.AddTestAttachment(path, description);
+        internal static void PrintError(string msg)
+            => TestContext.Error.WriteLine($"=> {msg}");
 
         // to check and play :)
         internal static void PrintLinesToCheck()

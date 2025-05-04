@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using TestFramework_NET.Frameworks.Selenium.Extensions.WebElements;
+using TestFramework_NET.Frameworks.Selenium.Extensions;
 
 namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages.Components
 {

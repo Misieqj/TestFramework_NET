@@ -1,5 +1,5 @@
 ﻿using Microsoft.Playwright;
-using TestFramework_NET.TestProject.UI_DemoQA.Data;
+using TestFramework_NET.TestProject.UI_DemoQA.Data.Models;
 
 namespace TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Pages
 {
@@ -15,25 +15,23 @@ namespace TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Pages
         private ILocator StudentGender => ModalBox.Locator("//td[text()='Gender']/../td").Last;
         private ILocator StudentPhone => ModalBox.Locator("//tr[td[text()='Mobile']]/td[2]");
 
-        internal async Task FillNecessaryDataAsync(StudentFormModel studentData)
+        internal async Task FillNecessaryDataAsync(StudentModel student)
         {
-            await InputFirstName.FillAsync(studentData.GetFirstName());
-            await InputLastName.FillAsync(studentData.GetLastName());
-            if (studentData.Gender != null)
-                await RadioGender.GetByText(studentData.Gender, new() { Exact = true }).ClickAsync();
-            if (studentData.Mobile != null)
-                await InputMobile.FillAsync(studentData.Mobile);
+            await InputFirstName.FillAsync(student.FullName.Split(" ").First());
+            await InputLastName.FillAsync(student.FullName.Split(" ").Last());
+            await RadioGender.GetByText(student.Gender, new() { Exact = true }).ClickAsync();
+            await InputMobile.FillAsync(student.Mobile);
         }
 
         internal async Task SubmitFormAsync()
             => await ButtonSubmit.ClickAsync();
 
-        internal async Task<StudentFormModel> GetDataFromModalAsync()
+        internal async Task<StudentModel> GetDataFromModalAsync()
             => new()
                 {
-                    FullName = await StudentFullName.TextContentAsync(),
-                    Gender = await StudentGender.TextContentAsync(),
-                    Mobile = await StudentPhone.TextContentAsync()
+                    FullName = await StudentFullName.TextContentAsync() ?? string.Empty,
+                    Gender = await StudentGender.TextContentAsync() ?? string.Empty,
+                    Mobile = await StudentPhone.TextContentAsync() ?? string.Empty
                 };
     }
 }

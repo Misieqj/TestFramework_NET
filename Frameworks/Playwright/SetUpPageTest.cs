@@ -1,5 +1,6 @@
 ﻿using Microsoft.Playwright;
-using TestFramework_NET.Frameworks.Playwright.Extensions;
+using TestFramework_NET.Common;
+using TestFramework_NET.Frameworks.Playwright.Helpers;
 
 namespace TestFramework_NET.Frameworks.Playwright
 {
@@ -22,6 +23,8 @@ namespace TestFramework_NET.Frameworks.Playwright
             Browser = await RunBrowserAsync(Playwright);
             Context = await CreateContext(Browser);
             Page = await Context.NewPageAsync();
+            QLogger.PrintStartWithTcName();
+            await Context.StartTracingAsync();
         }
 
         [TearDown]
@@ -29,11 +32,28 @@ namespace TestFramework_NET.Frameworks.Playwright
         {
             if (IsTestFail())
             {
-                await Page.DoScreenshotAsync();
-                await Page.StopRecordVideoAsync();
+                if (bool.Parse(TestContext.Parameters.Get("Screenshot") ?? "true"))
+                {
+                    var ssPath = await Page.DoScreenshotAsync();
+                    QLogger.Print("---");
+                    QLogger.Print($"Screenshot path: {ssPath}");
+
+                    var tracePath = await Context.StopTracingAsync();
+                    QLogger.Print($"Trace path: {tracePath}");
+                }
             }
-            await Browser!.CloseAsync();
-            Playwright?.Dispose();
+
+            await Browser.CloseAsync();
+            Playwright.Dispose();
+
+            if (IsTestFail())
+            {
+                var videoPath = await Page.StopRecordVideoAsync();
+                QLogger.Print($"Video record path: {videoPath}");
+            }
+            else
+                await Page.DeleteRecordedVideoAsync();
+            QLogger.PrintEnd();
         }
 
         protected static bool IsTestFail()
@@ -46,14 +66,15 @@ namespace TestFramework_NET.Frameworks.Playwright
 
         private static async Task<IBrowser> RunBrowserAsync(IPlaywright playwright)
         {
+            var headless = TestContext.Parameters.Get("Headless") ?? "false";
             var _browserType = TestContext.Parameters.Get("BrowserName") ?? "chromium";
             var browserOptions = new BrowserTypeLaunchOptions
             {
                 //=> https://playwright.dev/dotnet/docs/api/class-browser#browser-new-context
-                Timeout = 10000
+                Timeout = 10000,
+                Headless = bool.Parse(headless),
                 //SlowMo = 1000,
-                //Devtools = true
-                //Headless = false //=> set in runsettings.
+                //Devtools = true //=> Only for Chromium
             };
             var browser = _browserType switch
             {
@@ -73,14 +94,13 @@ namespace TestFramework_NET.Frameworks.Playwright
             var context = await browser.NewContextAsync(new BrowserNewContextOptions
             {
                 ViewportSize = new() { Width = 1280, Height = 720 },
-                //=> good to set unique name to later easier find sth in logs
-                UserAgent = "Aqq Nunit Agent",
-                //=> Settings for recording
-                // RecordVideoDir = "videos/",
-                //=> Additional useful settings
-                ColorScheme = ColorScheme.Dark,
                 TimezoneId = "Europe/Berlin",
-                Locale = "en-US"
+                Locale = "en-US",
+                UserAgent = "Aqq Nunit Agent",
+                ColorScheme = ColorScheme.Dark,
+                //=> Settings for recording
+                RecordVideoDir = TestContext.Parameters.Get("DirResults"),
+                //===
                 // StorageStatePath = "session.json",
                 // HttpCredentials = new HttpCredentials { Username = "admin", Password = "admin" },
                 // ExtraHTTPHeaders = new Dictionary<string, string> { ["Authorization"] = "Bearer token" },
