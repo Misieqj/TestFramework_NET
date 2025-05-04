@@ -38,14 +38,14 @@
 
     <!-- Don't copy to Output Directory -->
     <None Include="C:\Users\misie\source\repos\TestFramework_NET\.editorconfig" />
-    <None Update="TestProject\UI_DemoQA\Data\student.json">
+    <None Update="TestProject\DemoQA\Data\student.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="TestProject\UI_DemoQA\Data\student.xml">
+    <None Update="TestProject\DemoQA\Data\student.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <!-- Below files copy to Output Directory -->
-    <None Update="TestProject\UI_DemoQA\settings.json">
+    <None Update="TestProject\DemoQA\settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

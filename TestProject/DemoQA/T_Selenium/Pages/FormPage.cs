@@ -1,8 +1,8 @@
 ﻿using OpenQA.Selenium;
 using TestFramework_NET.Frameworks.Selenium.Extensions;
-using TestFramework_NET.TestProject.UI_DemoQA.Data.Models;
+using TestFramework_NET.TestProject.DemoQA.Data.Models;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages
+namespace TestFramework_NET.TestProject.DemoQA.T_Selenium.Pages
 {
     internal class FormPage(IWebDriver _driver)
     {

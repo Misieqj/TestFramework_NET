@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using TestFramework_NET.Frameworks.Selenium.Extensions;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages.Components
+namespace TestFramework_NET.TestProject.DemoQA.T_Selenium.Pages.Components
 {
     internal class MenuComponent(IWebDriver _driver)
     {

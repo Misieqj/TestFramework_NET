@@ -2,20 +2,20 @@
 using TestFramework_NET.Common.Helpers;
 using TestFramework_NET.Common.Models;
 using TestFramework_NET.Frameworks.Playwright;
-using TestFramework_NET.TestProject.UI_DemoQA.Data.Models;
-using TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Pages;
-using TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Pages.Components;
+using TestFramework_NET.TestProject.DemoQA.Data.Models;
+using TestFramework_NET.TestProject.DemoQA.T_Playwright.Pages;
+using TestFramework_NET.TestProject.DemoQA.T_Playwright.Pages.Components;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.T_Playwright.Tests
+namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
 {
     public class FormsTests_SetUp : SetUpPageTest
     {
-        private readonly string _filePath = "TestProject\\UI_DemoQA\\settings.json";
+        private readonly string _settingsFilePath = "TestProject\\DemoQA\\settings.json";
 
         [SetUp]
         public async Task Setup()
         {
-            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(_filePath);
+            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(_settingsFilePath);
             await Page.GotoAsync(settings.BaseUrl);
         }
 

@@ -3,25 +3,25 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using TestFramework_NET.Common.Models;
 using TestFramework_NET.Common;
-using TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages;
-using TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Pages.Components;
+using TestFramework_NET.TestProject.DemoQA.T_Selenium.Pages;
+using TestFramework_NET.TestProject.DemoQA.T_Selenium.Pages.Components;
 using TestFramework_NET.Frameworks.Selenium;
-using TestFramework_NET.TestProject.UI_DemoQA.Data.Models;
+using TestFramework_NET.TestProject.DemoQA.Data.Models;
 using TestFramework_NET.Common.Helpers;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.T_Selenium.Tests
+namespace TestFramework_NET.TestProject.DemoQA.T_Selenium.Tests
 {
     [TestFixture]
     public class FormsTests
     {
-        private readonly string _filePath = "TestProject\\UI_DemoQA\\settings.json";
+        private readonly string _settingsFilePath = "TestProject\\DemoQA\\settings.json";
         private IWebDriver _driver;
         //private ChromeDriver _driver; // if we want to set some special ChromeOptions()
 
         [SetUp]
         public void Setup()
         {
-            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(_filePath);
+            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(_settingsFilePath);
             QLogger.PrintStartWithTcName();
             _driver = new ChromeDriver(); // we can also use FirefoxDriver or EdgeDriver
             _driver.Manage().Window.Size = new System.Drawing.Size(1280, 720);

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace TestFramework_NET.TestProject.UI_DemoQA.Data.Models
+namespace TestFramework_NET.TestProject.DemoQA.Data.Models
 {
     [XmlRoot("Student")]
     public class StudentModel
