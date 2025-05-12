@@ -28,8 +28,8 @@ namespace TestFramework_NET.TestProject.NUnit_Params
         public void Test_ToCheckAtributes()
         {
             QLogger.Print($"Property    => {TestProperties.Get("KeyOfProperty")}");
-            QLogger.Print($"Description => {TestProperties.Get("Description")}"); // will print "This test is ignored"
-            QLogger.Print($"Author      => {TestProperties.Get("Author")}"); // will print "Misiek"
+            QLogger.Print($"Description => {TestProperties.Get("Description")}");
+            QLogger.Print($"Author      => {TestProperties.Get("Author")}");
 
             Assert.That(_trueResult, Is.True);
         }
@@ -55,6 +55,7 @@ namespace TestFramework_NET.TestProject.NUnit_Params
         [Test]
         [Retry(4)]
         // https://docs.nunit.org/articles/nunit/writing-tests/attributes/retry.html
+        // Output will be only for last try
         public void Test_ToCheckRetry()
         {
             QLogger.Print("This test is retry until pass, and output display only last try");

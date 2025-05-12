@@ -4,11 +4,12 @@ Test Framework Project with NUnit and testing UI and API libs (*Playwright and S
 # Install browsers before first run
 `./playwright.ps1 install`
 
-# To run tests remember about runsettings file
+# To run tests always add configuration file
 * **In VS** → Test / Configure Run Settings / Select Solution Wide Runsettings File
 * **Command** → `dotnet test --settings test.runsettings`
 
 # Pages to play with tests:
+* **Testelka app list** → https://testelka.pl/strony-na-ktorych-mozna-cwiczyc-testowanie/
 * **List of pages** → https://ultimateqa.com/dummy-automation-websites/
 * **UI - DemoQA** → https://demoqa.com/
 * **UI - SauceDemo** → https://www.saucedemo.com/

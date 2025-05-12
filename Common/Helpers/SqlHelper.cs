@@ -1,20 +1,11 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
 
 namespace TestFramework_NET.Common.Helpers
 {
     // not checked
     internal class SqlHelper
     {
-        /* Example of using params in Query
-            int rows = SqlHelper.ExecuteNonQuery(
-                "INSERT INTO Users (Name, Email) VALUES (@Name, @Email)",
-                new()
-                {
-                    { "@Name", "Adam" },
-                    { "@Email", "adam@example.com" }
-                }
-            );
-        */
         internal static readonly string ConnectionString;
 
         static SqlHelper()
@@ -27,62 +18,42 @@ namespace TestFramework_NET.Common.Helpers
         /// Execute a SQL query that does not return any results (e.g., INSERT, UPDATE, DELETE).
         /// </summary>
         /// <returns>Return number of affected rows</returns>
-        public static int ExecuteNonQuery(string query, Dictionary<string, object>? parameters = null)
+        public static int ExecuteNonQuery(string query, object? parameters = null)
         {
             using var connection = new SqlConnection(ConnectionString);
-            using var command = new SqlCommand(query, connection);
-            AddParameters(command, parameters);
-            
             connection.Open();
-          
-            return command.ExecuteNonQuery();
+            var result = connection.Execute(query, parameters);
+            connection.Close();
+
+            return result;
         }
 
         /// <summary>
-        /// Execute a SQL query that returns a single value (e.g., COUNT, SUM).
+        /// Execute a SQL query that returns a single line result.
         /// </summary>
-        /// <param name="map"> To map the result to a specific type.</param>
-        /// r => new User { Id = r.GetInt32(0), Name = r.GetString(1) }
-        /// r => new User { Id = r.GetInt32(r.GetOrdinal("Id")), Name = r.GetString(r.GetOrdinal("Name")) }
-        public static T? QuerySingle<T>(string query, Func<SqlDataReader, T> map, Dictionary<string, object>? parameters = null)
+        /// <example> QuerySingle<User>("SELECT * FROM Users WHERE Id = @Id", new() { { "@Id", 1 } })</example>
+        public static T? QuerySingle<T>(string query, object? parameters = null)
         {
             using var connection = new SqlConnection(ConnectionString);
-            using var command = new SqlCommand(query, connection);
-            AddParameters(command, parameters);
-
             connection.Open();
-            using var reader = command.ExecuteReader();
-            
-            return reader.Read() ? map(reader) : default;
+            var result = connection.QueryFirstOrDefault<T>(query, parameters);
+            connection.Close();
+
+            return result; 
         }
 
         /// <summary>
-        /// Execute a SQL query that returns a list of results.
+        /// Execute a SQL query that returns a multi rows result.
         /// </summary>
-        public static List<T> QueryList<T>(string query, Func<SqlDataReader, T> map, Dictionary<string, object>? parameters = null)
+        /// <example> QueryMany<User>("SELECT * FROM Users WHERE Age > @Age", new() { { "@Age", 18 } })</example>
+        public static IEnumerable<T> QueryMany<T>(string query, object? parameters = null)
         {
-            var results = new List<T>();
             using var connection = new SqlConnection(ConnectionString);
-            using var command = new SqlCommand(query, connection);
-            AddParameters(command, parameters);
-
             connection.Open();
-            using var reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                results.Add(map(reader));
-            }
+            var result = connection.Query<T>(query, parameters);
+            connection.Close();
 
-            return results;
-        }
-
-        private static void AddParameters(SqlCommand command, Dictionary<string, object>? parameters)
-        {
-            if (parameters == null) return;
-            foreach (var param in parameters)
-            {
-                command.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
-            }
+            return result;
         }
     }
 }

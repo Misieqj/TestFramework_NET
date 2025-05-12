@@ -15,7 +15,7 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
         [SetUp]
         public async Task Setup()
         {
-            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(_settingsFilePath);
+            SettingsModel settings = JsonHelper.ObjectFromFile<SettingsModel>(_settingsFilePath);
             await Page.GotoAsync(settings.BaseUrl);
         }
 

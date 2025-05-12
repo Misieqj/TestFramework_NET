@@ -19,11 +19,9 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
         [SetUp]
         public async Task Setup()
         {
-            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(SettingsFilePath);
+            SettingsModel settings = JsonHelper.ObjectFromFile<SettingsModel>(SettingsFilePath);
             QLogger.PrintStartWithTcName();
             await Page.GotoAsync(settings.BaseUrl);
-
-            string ns = typeof(FormsTests).Namespace!;
         }
 
         [Test]
@@ -73,7 +71,7 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
         public async Task CheckFormNecessaryData_JSON()
         {
             // Arrange
-            StudentModel studentData = JsonHelper.LoadJson<StudentModel>(StudentJsonPath);
+            StudentModel studentData = JsonHelper.ObjectFromFile<StudentModel>(StudentJsonPath);
 
             // Act
             MenuComponent menu = new(Page);

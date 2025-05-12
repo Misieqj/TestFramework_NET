@@ -21,7 +21,7 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Selenium.Tests
         [SetUp]
         public void Setup()
         {
-            SettingsModel settings = JsonHelper.LoadJson<SettingsModel>(_settingsFilePath);
+            SettingsModel settings = JsonHelper.ObjectFromFile<SettingsModel>(_settingsFilePath);
             QLogger.PrintStartWithTcName();
             _driver = new ChromeDriver(); // we can also use FirefoxDriver or EdgeDriver
             _driver.Manage().Window.Size = new System.Drawing.Size(1280, 720);

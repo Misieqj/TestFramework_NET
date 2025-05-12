@@ -19,6 +19,9 @@
         internal static void PrintEnd()
             => TestContext.Out.WriteLine("╚═════════════════════════════════════════════════════════════════════════");
 
+        internal static void PrintHeader(string msg)
+            => TestContext.Out.WriteLine($"╠═▶ {msg}");
+
         internal static void Print(string msg)
             => TestContext.Out.WriteLine($"║ {msg}");
 
