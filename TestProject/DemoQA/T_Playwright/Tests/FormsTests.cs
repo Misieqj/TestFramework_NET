@@ -24,6 +24,12 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
             await Page.GotoAsync(settings.BaseUrl);
         }
 
+        [TearDown]
+        public void TearDowns()
+        {
+            QLogger.PrintEnd();
+        }
+
         [Test]
         public async Task CheckFormNecessaryData()
         {
@@ -84,12 +90,6 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
 
             // Assert
             studentData.Should().BeEquivalentTo(studentSavedData);
-        }
-
-        [TearDown]
-        public void TearDowns()
-        {
-            QLogger.PrintEnd();
         }
     }
 }

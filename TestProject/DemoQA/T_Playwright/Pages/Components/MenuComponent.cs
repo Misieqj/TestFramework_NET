@@ -11,6 +11,7 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Pages.Components
         internal static string Widgets => "Widgets";
         internal static string Interactions => "Interactions";
         internal static string BookStoreApplication => "Book Store Application";
+        internal static string BookStoreApplication_BookStore => "Book Store";
 
         private ILocator MenuItem(string name)
             => _page.Locator($"//*[contains(text(), '{name}')]");

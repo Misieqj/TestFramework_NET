@@ -20,5 +20,7 @@ namespace TestFramework_NET.Frameworks.Playwright.Extensions
         /// </summary>
         internal static async Task MakeVisibleAsync(this ILocator element)
             => await element.EvaluateAsync("el => el.style.display = 'block'");
+
+        //=> Click and wait for response to complete.
     }
 }

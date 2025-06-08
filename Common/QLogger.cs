@@ -22,21 +22,36 @@
         internal static void PrintHeader(string msg)
             => TestContext.Out.WriteLine($"╠═▶ {msg}");
 
-        internal static void Print(string msg)
-            => TestContext.Out.WriteLine($"║ {msg}");
+        internal static void Print(string msg = "< ??? >")
+        {
+            var msgs = msg.Split([Environment.NewLine], StringSplitOptions.None);
+            foreach (var m in msgs)
+            {
+                TestContext.Out.WriteLine($"║ {m}");
+            }
+        }
 
-        internal static void PrintWithTimeStamp(string msg)
+        internal static void PrintWithTimestamp(string msg)
             => TestContext.Out.WriteLine($"║ {DateTime.Now}: {msg}");
 
-        // For test results
-        internal static void PrintAttachmentInfo(string path, string description)
-            => TestContext.AddTestAttachment(path, description);
+         //====================================================================
+        /// <summary>
+        /// Prints error message to the TestContext Error output.
+        /// </summary>
         internal static void PrintError(string msg)
             => TestContext.Error.WriteLine($"=> {msg}");
 
+        /// <summary>
+        /// Prints the attachment information to the TestContext.
+        /// </summary>
+        internal static void PrintAttachmentInfo(string path, string description)
+            => TestContext.AddTestAttachment(path, description);
+
+         //====================================================================
         // to check and play :)
         internal static void PrintLinesToCheck()
         {
+            TestContext.Out.WriteLine($"╠════════════════════════════════");
             Console.WriteLine("Deafult colors");
             Console.BackgroundColor = ConsoleColor.Green;
             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -47,7 +62,6 @@
             Console.ResetColor();
             Console.WriteLine("After reset colors");
             TestContext.Progress.WriteLine("║ Progress");
-            TestContext.Error.WriteLine("║ Error");
             TestContext.Error.WriteLine("║ Error");
         }
     }

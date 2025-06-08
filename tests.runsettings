@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <RunSettings>
-	<TestRunParameters>
-		<!-- Test Params -->
+  <TestRunParameters>
+    <!-- Test Params -->
     <Parameter name="Screenshot" value="true" />
     <Parameter name="DirResults" value="_Results" />
     <Parameter name="ConnectionString" value="Server=your_server;Database=your_db;User Id=your_user;Password=your_pass;" />
-		<!-- Playwright options -->
+    <!-- Playwright options -->
     <Parameter name="BrowserType" value="chromium" /> <!-- chromium / firefox / webkit -->
     <Parameter name="Headless" value="false" />
-	</TestRunParameters>
+  </TestRunParameters>
   <Playwright>
     <LaunchOptions>
       <Headless>false</Headless>
     </LaunchOptions>
   </Playwright>
   <RunConfiguration>
-		<EnvironmentVariables>
-			<PWDEBUG>0</PWDEBUG>
-		</EnvironmentVariables>
-	</RunConfiguration>
+    <EnvironmentVariables>
+      <PWDEBUG>0</PWDEBUG>
+    </EnvironmentVariables>
+  </RunConfiguration>
 </RunSettings>

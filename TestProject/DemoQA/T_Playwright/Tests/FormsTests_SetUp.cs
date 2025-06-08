@@ -20,7 +20,7 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Tests
         }
 
         [Test]
-        public async Task CheckFormNecessaryData()
+        public async Task NegativeCheckFormNecessaryData()
         {
             // Arrange
             StudentModel studentData = new()

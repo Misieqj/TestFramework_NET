@@ -14,8 +14,9 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageReference Include="NUnit" Version="4.3.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
     <PackageReference Include="NUnit.Analyzers" Version="4.6.0">
+      <!-- <PackageReference Include="NUnitTestAdapter.WithFramework" Version="2.0.0" /> -->
+      <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -26,6 +27,7 @@
     <!-- Selenium -->
     <PackageReference Include="Selenium.Support" Version="4.30.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.30.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="136.0.7103.9200" />
     <!-- Assertion -->
     <PackageReference Include="FluentAssertions" Version="8.2.0" />
   </ItemGroup>

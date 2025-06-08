@@ -12,6 +12,7 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Selenium.Pages.Components
         internal static string Widgets => "Widgets";
         internal static string Interactions => "Interactions";
         internal static string BookStoreApplication => "Book Store Application";
+        internal static string BookStoreApplication_BookStore => "Book Store";
 
         private IWebElement MenuItem(string name)
             => _driver.FindElement(By.XPath($"//*[contains(text(), '{name}')]"));

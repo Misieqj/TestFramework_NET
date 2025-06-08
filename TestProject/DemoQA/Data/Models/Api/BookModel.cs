@@ -2,7 +2,7 @@
 
 namespace TestFramework_NET.TestProject.DemoQA.Data.Models.Api
 {
-    internal class BookModel
+    public class BookModel
     {
         [JsonPropertyName("isbn")]
         public string? Isbn { get; set; }

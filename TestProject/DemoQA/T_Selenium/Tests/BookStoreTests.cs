@@ -4,14 +4,13 @@ using TestFramework_NET.Common;
 using TestFramework_NET.Common.Helpers;
 using TestFramework_NET.Common.Models;
 using TestFramework_NET.Frameworks.Selenium;
-using TestFramework_NET.TestProject.DemoQA.Data.Models;
 using TestFramework_NET.TestProject.DemoQA.T_Selenium.Pages;
 using TestFramework_NET.TestProject.DemoQA.T_Selenium.Pages.Components;
 
 namespace TestFramework_NET.TestProject.DemoQA.T_Selenium.Tests
 {
     [TestFixture]
-    public class FormsTests
+    public class BookStoreTests
     {
         private readonly string _settingsFilePath = "TestProject\\DemoQA\\settings.json";
         private ChromeDriver _driver;
@@ -22,33 +21,25 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Selenium.Tests
             SettingsModel settings = JsonHelper.ObjectFromFile<SettingsModel>(_settingsFilePath);
             QLogger.PrintStartWithTcName();
             _driver = new ChromeDriver();
-            _driver.Manage().Window.Size = new System.Drawing.Size(1280, 720);
+            _driver.Manage().Window.Size = new System.Drawing.Size(1680, 1024);
             _driver.Navigate().GoToUrl(settings.BaseUrl);
             WebDriverManager.Driver = _driver;
         }
 
         [Test]
-        public void CheckFormNecessaryData()
+        public void OpenBookStorePage()
         {
             // Arrange
-            StudentModel studentData = new()
-            {
-                FullName = "FirstName LastName",
-                Gender = "Male",
-                Mobile = "1234567890"
-            };
+            const string firstTitle = "Git Pocket Guide";
 
             // Act
             new MenuComponent(_driver)
-                .ClickMenuPosition(MenuComponent.Forms)
-                .ClickSubmenuPosition(MenuComponent.Forms_PracticeForm);
-            var studentSavedData = new FormPage(_driver)
-                .FillNecessaryData(studentData)
-                .SubmitForm()
-                .GetDataFromModal();
+                .ClickMenuPosition(MenuComponent.BookStoreApplication);
+                //.ClickSubmenuPosition(MenuComponent.BookStoreApplication_BookStore);
+            var bookStorePage = new BookStorePage(_driver).GetTableRowText();
 
             // Assert
-            studentData.Should().BeEquivalentTo(studentSavedData);
+            bookStorePage.Should().Contain(firstTitle);
         }
 
         [TearDown]

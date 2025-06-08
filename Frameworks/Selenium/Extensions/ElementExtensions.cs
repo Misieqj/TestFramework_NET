@@ -1,10 +1,18 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace TestFramework_NET.Frameworks.Selenium.Extensions
 {
     internal static class ElementExtensions
     {
+        /// <summary>
+        /// Waits for an element to be present in the DOM and returns it.
+        /// </summary>
+        internal static IWebElement WaitAndFindElement(this IWebDriver driver, By by, int timeout = 10)
+            => new WebDriverWait(driver, TimeSpan.FromSeconds(timeout))
+                .Until(driver => driver.FindElement(by));
+
         /// <summary>
         /// Select a random option from a dropdown list.
         /// </summary>
