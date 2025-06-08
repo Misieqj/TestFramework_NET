@@ -19,11 +19,11 @@ namespace TestFramework_NET.TestProject.DemoQA.T_Playwright.Pages
                 throw new Exception("Index is out of range. Please provide a valid index.");
             }
             var firstRow = TableRows.Nth(index);
-            var result = await firstRow.TextContentAsync();
+            var result = await firstRow.TextContentAsync() ?? string.Empty;
             QLogger.PrintHeader("Text from row:");
             QLogger.Print(result);
                 
-            return result ?? string.Empty;
+            return result;
         }
     }
 }
