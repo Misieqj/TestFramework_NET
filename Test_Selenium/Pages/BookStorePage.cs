@@ -6,8 +6,10 @@ namespace TestFramework_NET.Test_Selenium.Pages
 {
     internal class BookStorePage(IWebDriver _driver)
     {
-        private IWebElement Table => _driver.WaitAndFindElement(By.XPath("//div[contains(@class,'ReactTable')]"));
-        private IEnumerable<IWebElement> TableRows => Table.FindElements(By.XPath("//div[@class='rt-tbody']//div[@role='row']"));
+        private IWebElement Table
+            => _driver.WaitAndFindElement(By.XPath("//div[contains(@class,'ReactTable')]"));
+        private IEnumerable<IWebElement> TableRows
+            => Table.FindElements(By.XPath("//div[@class='rt-tbody']//div[@role='row']"));
 
         internal string GetTableRowText(int index = 0)
         {

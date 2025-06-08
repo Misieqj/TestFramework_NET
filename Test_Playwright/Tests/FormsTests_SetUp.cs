@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using TestFramework_NET.Common.Helpers;
 using TestFramework_NET.Common.Models;
+using TestFramework_NET.Data;
 using TestFramework_NET.Data.Models;
 using TestFramework_NET.Test_Playwright.Pages;
 using TestFramework_NET.Test_Playwright.Pages.Components;
@@ -31,8 +32,8 @@ namespace TestFramework_NET.Test_Playwright.Tests
 
             // Act
             MenuComponent menu = new(Page);
-            await menu.ClickMenuPositionAsync(MenuComponent.Forms);
-            await menu.ClickSubmenuPositionAsync(MenuComponent.Forms_PracticeForm);
+            await menu.ClickMenuPositionAsync(MenuData.Forms);
+            await menu.ClickSubmenuPositionAsync(MenuData.Forms_PracticeForm);
             FormPage formPage = new(Page);
             await formPage.FillNecessaryDataAsync(studentData);
             await formPage.SubmitFormAsync();

@@ -3,9 +3,10 @@ using OpenQA.Selenium.Chrome;
 using TestFramework_NET.Common;
 using TestFramework_NET.Common.Helpers;
 using TestFramework_NET.Common.Models;
+using TestFramework_NET.Data;
 using TestFramework_NET.Data.Models;
-using TestFramework_NET.Test_Selenium.Pages.Components;
 using TestFramework_NET.Test_Selenium.Pages;
+using TestFramework_NET.Test_Selenium.Pages.Components;
 
 namespace TestFramework_NET.Test_Selenium.Tests
 {
@@ -39,8 +40,8 @@ namespace TestFramework_NET.Test_Selenium.Tests
 
             // Act
             new MenuComponent(_driver)
-                .ClickMenuPosition(MenuComponent.Forms)
-                .ClickSubmenuPosition(MenuComponent.Forms_PracticeForm);
+                .ClickMenuPosition(MenuData.Forms)
+                .ClickSubmenuPosition(MenuData.Forms_PracticeForm);
             var studentSavedData = new FormPage(_driver)
                 .FillNecessaryData(studentData)
                 .SubmitForm()
@@ -53,7 +54,7 @@ namespace TestFramework_NET.Test_Selenium.Tests
         [TearDown]
         public void TearDown()
         {
-            _driver.Quit(); // close browser
+            _driver.Quit();    // close browser
             _driver.Dispose(); // clean resources
             QLogger.PrintEnd();
         }

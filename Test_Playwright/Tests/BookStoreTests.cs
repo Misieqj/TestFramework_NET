@@ -3,6 +3,7 @@ using Microsoft.Playwright.NUnit;
 using TestFramework_NET.Common;
 using TestFramework_NET.Common.Helpers;
 using TestFramework_NET.Common.Models;
+using TestFramework_NET.Data;
 using TestFramework_NET.Data.Models.Api;
 using TestFramework_NET.Test_Playwright.Extensions;
 using TestFramework_NET.Test_Playwright.Pages;
@@ -38,7 +39,7 @@ namespace TestFramework_NET.Test_Playwright.Tests
 
             // Act
             MenuComponent menu = new(Page);
-            await menu.ClickMenuPositionAsync(MenuComponent.BookStoreApplication);
+            await menu.ClickMenuPositionAsync(MenuData.BookStoreApplication);
             // API
             string bookListResp = await Page.GetResponseBody(apiBooksList, TimeSpan.FromSeconds(10)) ?? string.Empty;
             BooksModel booksList = JsonHelper.ObjectFromJson<BooksModel>(bookListResp);
@@ -65,8 +66,8 @@ namespace TestFramework_NET.Test_Playwright.Tests
 
             // Act
             MenuComponent menu = new(Page);
-            await menu.ClickMenuPositionAsync(MenuComponent.BookStoreApplication);
-            await menu.ClickSubmenuPositionAsync(MenuComponent.BookStoreApplication_BookStore);
+            await menu.ClickMenuPositionAsync(MenuData.BookStoreApplication);
+            await menu.ClickSubmenuPositionAsync(MenuData.BookStoreApplication_BookStore);
             BookStorePage bookStorePage = new(Page);
             string bookStoreText = await bookStorePage.GetTableRowTextAsync();
 
@@ -84,7 +85,7 @@ namespace TestFramework_NET.Test_Playwright.Tests
 
             // Act
             MenuComponent menu = new(Page);
-            await menu.ClickMenuPositionAsync(MenuComponent.BookStoreApplication);
+            await menu.ClickMenuPositionAsync(MenuData.BookStoreApplication);
             BookStorePage bookStorePage = new(Page);
             string bookStoreText = await bookStorePage.GetTableRowTextAsync();
 

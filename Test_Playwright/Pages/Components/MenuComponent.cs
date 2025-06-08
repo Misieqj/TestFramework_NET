@@ -4,15 +4,6 @@ namespace TestFramework_NET.Test_Playwright.Pages.Components
 {
     internal class MenuComponent(IPage _page)
     {
-        internal static string Elements => "Elements";
-        internal static string Forms => "Forms";
-        internal static string Forms_PracticeForm => "Practice Form";
-        internal static string AlertsFrameWindows => "Alerts, Frame & Windows";
-        internal static string Widgets => "Widgets";
-        internal static string Interactions => "Interactions";
-        internal static string BookStoreApplication => "Book Store Application";
-        internal static string BookStoreApplication_BookStore => "Book Store";
-
         private ILocator MenuItem(string name)
             => _page.Locator($"//*[contains(text(), '{name}')]");
         private ILocator SubmenuItem(string name)

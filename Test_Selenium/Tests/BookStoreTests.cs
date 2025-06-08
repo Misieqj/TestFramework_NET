@@ -3,8 +3,9 @@ using OpenQA.Selenium.Chrome;
 using TestFramework_NET.Common;
 using TestFramework_NET.Common.Helpers;
 using TestFramework_NET.Common.Models;
-using TestFramework_NET.Test_Selenium.Pages.Components;
+using TestFramework_NET.Data;
 using TestFramework_NET.Test_Selenium.Pages;
+using TestFramework_NET.Test_Selenium.Pages.Components;
 
 namespace TestFramework_NET.Test_Selenium.Tests
 {
@@ -33,7 +34,7 @@ namespace TestFramework_NET.Test_Selenium.Tests
 
             // Act
             new MenuComponent(_driver)
-                .ClickMenuPosition(MenuComponent.BookStoreApplication);
+                .ClickMenuPosition(MenuData.BookStoreApplication);
                 //.ClickSubmenuPosition(MenuComponent.BookStoreApplication_BookStore);
             var bookStorePage = new BookStorePage(_driver).GetTableRowText();
 
